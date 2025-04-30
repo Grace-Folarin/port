@@ -1,342 +1,563 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SleekTech Innovations</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            scroll-behavior: smooth;
-            background: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Grace</title>
+    <meta>
+    <meta>
 
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #fff;
-        }
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/vendor.css">
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
+    <!-- script
+    ================================================== -->
+    <script src="js/modernizr.js"></script>
 
-        nav ul li a {
-            color: #ccc;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
+    <!-- favicons
+    ================================================== -->
+    <!--<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">-->
 
-        nav ul li a:hover {
-            color: #fff;
-        }
-
-        section {
-            min-height: 100vh;
-            padding: 4rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        #hero {
-            background: #000;
-            position: relative;
-        }
-
-        #features, #products, #vision, #contact {
-            background: #111;
-        }
-
-        h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s, transform 0.6s;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        p {
-            max-width: 700px;
-            font-size: 1.2rem;
-            color: #ccc;
-            margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s, transform 0.6s;
-        }
-
-        .hero-img {
-            max-width: 800px;
-            width: 100%;
-            border-radius: 20px;
-            margin-top: 2rem;
-            transition: transform 0.5s;
-        }
-
-        .hero-img:hover {
-            transform: scale(1.05);
-        }
-
-        .feature-grid, .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            width: 100%;
-            margin: 2rem auto;
-        }
-
-        .feature-card, .product-card {
-            background: #222;
-            padding: 2rem;
-            border-radius: 15px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover, .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .feature-card img, .product-card img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3, .product-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: #fff;
-            color: #000;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 10px;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .btn:hover {
-            background: #ccc;
-            transform: translateY(-3px);
-        }
-
-        .contact-form {
-            max-width: 600px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .contact-form input, .contact-form textarea {
-            padding: 1rem;
-            background: #222;
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .contact-form input::placeholder, .contact-form textarea::placeholder {
-            color: #666;
-        }
-
-        .contact-form button {
-            padding: 1rem;
-            background: #fff;
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .contact-form button:hover {
-            background: #ccc;
-        }
-
-        .visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 1.8rem; }
-            p { font-size: 1rem; }
-            nav ul { gap: 1rem; }
-            .hero-img { max-width: 100%; }
-            .feature-grid, .product-grid { grid-template-columns: 1fr; }
-        }
-    </style>
 </head>
-<body>
-    <nav>
-        <div class="logo">SleekTech</div>
-        <ul>
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#vision">Vision</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
 
-    <section id="hero">
-        <h1>Innovate. Create. Celebrate.</h1>
-        <p>Discover the future of technology with SleekTech Innovations. Our cutting-edge solutions redefine what's possible.</p>
-        <img src="https://picsum.photos/800/400?random=1" alt="Hero Image" class="hero-img">
-        <a href="#features" class="btn">Explore Now</a>
-    </section>
+<body id="top">
 
-    <section id="features">
-        <h2>Why Choose SleekTech?</h2>
-        <p>Our features set us apart, delivering unparalleled performance and user experience.</p>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <img src="https://picsum.photos/300/200?random=2" alt="Feature 1">
-                <h3>Seamless Performance</h3>
-                <p>Experience lightning-fast responsiveness with our optimized technology stack.</p>
-            </div>
-            <div class="feature-card">
-                <img src="https://picsum.photos/300/200?random=3" alt="Feature 2">
-                <h3>Intuitive Design</h3>
-                <p>Navigate effortlessly with our user-centric interfaces, designed for all.</p>
-            </div>
-            <div class="feature-card">
-                <img src="https://picsum.photos/300/200?random=4" alt="Feature 3">
-                <h3>Robust Security</h3>
-                <p>Your data is safe with our state-of-the-art encryption and protection systems.</p>
-            </div>
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-    </section>
+    </div>
 
-    <section id="products">
-        <h2>Our Products</h2>
-        <p>Explore our range of innovative devices and software solutions.</p>
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="https://picsum.photos/300/200?random=5" alt="Product 1">
-                <h3>SmartCore X1</h3>
-                <p>A revolutionary device that combines power and elegance in one package.</p>
-                <a href="#" class="btn">Learn More</a>
-            </div>
-            <div class="product-card">
-                <img src="https://picsum.photos/300/200?random=6" alt="Product 2">
-                <h3>FlowOS</h3>
-                <p>Our operating system redefines efficiency with seamless integration.</p>
-                <a href="#" class="btn">Learn More</a>
-            </div>
-            <div class="product-card">
-                <img src="https://picsum.photos/300/200?random=7" alt="Product 3">
-                <h3>ConnectSphere</h3>
-                <p>Stay connected with our advanced networking solutions for all environments.</p>
-                <a href="#" class="btn">Learn More</a>
-            </div>
+
+    <!-- header
+    ================================================== -->
+    <header class="s-header">
+
+        <div class="header-logo">
+            <a href="index.html">
+                <img src="images/logo.svg" alt="Homepage">
+            </a>
         </div>
-    </section>
 
-    <section id="vision">
-        <h2>Our Vision</h2>
-        <p>At SleekTech, we believe in a future where technology empowers everyone. Our mission is to create tools that inspire creativity, foster connection, and drive progress. We're not just building products; we're shaping the future.</p>
-        <img src="https://picsum.photos/800/400?random=8" alt="Vision Image" class="hero-img">
-    </section>
+        <div class="header-content">
+    
+            <nav class="row header-nav-wrap">
+                <ul class="header-nav">
+                    <li><a class="smoothscroll" href="#hero" title="Intro">Home</a></li>
+                    <li><a class="smoothscroll" href="#about" title="About">About</a></li>
+                    <li><a class="smoothscroll" href="#services" title="Services">Services</a></li>
+                    <li><a class="smoothscroll" href="#portfolio" title="Works">Works</a></li>
+                    <li><a href="mailto:#0" title="Contact us">Say Hello</a></li>
+                </ul>
+            </nav> <!-- end header-nav-wrap -->
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>Have questions or want to collaborate? We're here to help.</p>
-        <div class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" rows="5" required></textarea>
-            <button type="button">Send Message</button>
+            <a href="images/Folarin_Grace.pdf" class="btn btn--stroke btn--small" download="">Download CV</a>
+
+        </div> <!-- end header-content -->
+
+        <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+
+    </header> 
+
+
+    <!-- hero
+    ================================================== -->
+    <section id="hero" class="s-hero target-section" data-parallax="scroll" data-image-src="images/hero.jpeg" data-natural-width=500 data-natural-height=1000 data-position-y=center>
+
+        <div class="row hero-content">
+
+            <div class="column large-full">
+
+                <h1>
+                Hello, I'm Folarin Grace, <br>
+                a frontend developer <br>
+                & Data scientist currently <br>
+                based in Lagos.
+                </h1>
+
+                <ul class="hero-social">
+                    <li>
+                        <a href="https://github.com/Grace-Folarin?tab=repositories" title="">GitHub</a>
+                    </li>
+                    <li>
+                        <a href="mailto:folarinanuoluwapograce@gmail.com" title="">Email</a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/folarinanuoluwapograce/" title="">LinkedIn</a>
+                    </li>
+                </ul> <!-- end hero-social -->
+
+            </div> 
+
+        </div> <!-- end hero-content -->
+
+        <div class="hero-scroll">
+            <a href="#about" class="scroll-link smoothscroll">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 24l-8-9h6v-15h4v15h6z"/></svg>
+            </a>
+        </div> <!-- end hero-scroll -->
+
+    </section> <!-- end s-hero -->
+
+
+    <!-- about
+    ================================================== -->
+    <section id="about" class="s-about target-section">
+
+        <div class="s-about__section s-about__section--profile">
+
+            <div class="right-vert-line"></div>
+
+            <div class="row">
+                <div class="column large-6 medium-8 tab-full">
+
+                    <div class="section-intro" data-num="01" data-aos="fade-up">
+                        <h3 class="subhead">About Me</h3>
+                        <h1 class="display-1">Code. Connect. Communicate</h1>
+                    </div>
+
+                    <div class="profile-pic" data-aos="fade-up">
+                    
+                    </div>
+
+                    <h3 data-aos="fade-up">Profile</h3>
+
+                    <p data-aos="fade-up">
+                        I'm Grace, a Telecommunications Science undergraduate passionate about the intersection of software and network engineering. Currently undergoing my SIWES internship with Huawei on MTN's software team, I work on software quality assurance, cloud environments, and server configuration. 
+
+                        With a strong foundation in networking and a growing skill set in Python, Vue.js, and FastAPI. I’m always eager to learn, experiment, and contribute to impactful telecom solutions.
+                        
+                        
+                    </p>
+
+                </div>
+            </div>
+
+        </div> <!-- end s-about__section--profile -->
+
+        <div class="s-about__section">
+
+            <div class="row">
+                <div class="column">
+                    <h3 data-aos="fade-up">Career</h3>
+                </div>
+            </div>
+
+            <div class="row block-large-1-2 block-900-full work-positions">
+
+                <div class="column" data-aos="fade-up">
+                    <div class="position">
+                        <div class="position__header">
+                            <h6>
+                                <span class="position__co">Huawei</span>
+                                <span class="position__pos">Software Intern</span>
+                            </h6>
+                            <div class="position__timeframe">
+                                March 2025 - Present
+                            </div>
+                        </div>
+
+                        <p>
+                            Perform manual and automated software testing to ensure functionality, performance, and security of telecom applications.
+                        </p>
+                    </div>
+                </div> <!-- end column -->
+                <div class="column" data-aos="fade-up">
+                    <div class="position">
+                        <div class="position__header">
+                            <h6>
+                                <span class="position__co">Bluechip Technologies</span>
+                                <span class="position__pos">Data Science Intern</span>
+                            </h6>
+                            <div class="position__timeframe">
+                                November 2021 - July 2022
+                            </div>
+                        </div>
+
+                        <p>
+                            Assisted my mentor in collecting, analyzing, interpreting and preprocessing data sets to boost optimization of products. 
+                            I also helped present information using data visualization with the Tableau program. 
+                        </p>
+                    </div>
+                </div> <!-- end column -->
+                <!-- <div class="column" data-aos="fade-up">
+                    <div class="position">
+                        <div class="position__header">
+                            <h6>
+                                <span class="position__co">Dropbox</span>
+                                <span class="position__pos">Mobile App Designer</span>
+                            </h6>
+                            <div class="position__timeframe">
+                                April 2014 - August 2015
+                            </div>
+                        </div>
+
+                        <p>
+                        In hac habitasse platea dictumst. Donec pede justo, fringilla vel, aliquet nec, 
+                        vulputate eget, arcu. Fusce risus nisl, viverra et, tempor et, pretium in, sapien.
+                        Phasellus volutpat, metus eget.
+                        </p>
+                    </div>
+                </div> end column -
+                <div class="column" data-aos="fade-up">
+                    <div class="position">
+                        <div class="position__header">
+                            <h6>
+                                <span class="position__co">Microsoft</span>
+                                <span class="position__pos">Product Designer</span>
+                            </h6>
+                            <div class="position__timeframe">
+                                June 2012 - February 2014
+                            </div>
+                        </div> -->
+
+                        <!-- <p>
+                        Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. 
+                        Curabitur blandit mollis lacus. Curabitur vestibulum aliquam leo. 
+                        Vivamus in erat ut urna cursus vestibulum.
+                        </p>
+                    </div>
+                </div>  -->
+
+            </div> <!-- work positions -->
+
+        </div> <!-- end s-about__section -->
+
+    </section> <!-- end s-about -->
+
+
+    <!-- services
+    ================================================== -->
+    <section id="services" class="s-services target-section h-dark-bg">
+        
+        <div class="row s-services__content">
+
+            <div class="vert-line"></div>
+
+            <div class="column large-6 s-services__leftcol">
+                <div class="section-intro" data-num="02" data-aos="fade-up">
+                    <h3 class="subhead">Expertise</h3>
+
+                    <h1 class="display-1">
+                    I focus on crafting web experiences
+                    and designs that works.
+                    </h1>
+                </div>
+
+                <p class="lead" data-aos="fade-up">
+                    Where code meets connectivity and clean design
+                </p>
+            </div> <!-- end  s-services--leftcol -->
+
+            <div class="column large-6">
+                <ul class="services-list" data-aos="fade-up">
+                    <li class="services-list__item is-active">
+                        <div class="services-list__item-header">
+                            <h5>Telecommunications & networking</h5>
+                        </div>
+                        <div class="services-list__item-body">
+                            <p>
+                                With a strong academic foundation in Telecommunications Science, I have hands-on experience working with networking concepts such as IP addressing, VLANs, routing, and network monitoring. I’m currently applying these skills in real-world scenarios using Cisco Packet Tracer and live environments through my SIWES internship.
+                            </p>
+                        </div>
+                    </li> <!-- services-list__item -->
+                    <li class="services-list__item">
+                        <div class="services-list__item-header">
+                            <h5>Python Development</h5>
+                        </div>
+                        <div class="services-list__item-body">
+                            <p>
+                                Python is my core programming language for backend development and automation. I’ve used it extensively in building RESTful APIs with FastAPI and in scripting for telecom-related software tasks. I’m also learning advanced concepts like object-oriented programming, threading, and multiprocessing for more robust solutions.
+                            </p>
+                        </div>
+                    </li> <!-- services-list__item -->
+                    <li class="services-list__item">
+                        <div class="services-list__item-header">
+                            <h5>React</h5>
+                        </div>
+                        <div class="services-list__item-body">
+                            <p>
+                                I’ve recently started working with React to expand my frontend skills. React’s component-based architecture allows for flexible UI development, especially useful in dynamic and data-driven web applications. I’m currently exploring how to integrate React with telecom dashboards and real-time interfaces.
+                            </p>
+                        </div>
+                    </li> <!-- services-list__item -->
+                    <li class="services-list__item">
+                        <div class="services-list__item-header">
+                            <h5>Tailwind CSS</h5>
+                        </div>
+                        <div class="services-list__item-body">
+                            <p>
+                                Tailwind CSS is my preferred utility-first CSS framework for styling modern interfaces. It enables me to build clean, responsive designs quickly without writing verbose custom styles. I use it to create visually appealing and consistent UI elements across my projects.
+                            </p>
+                        </div>
+                    </li> <!-- services-list__item -->
+                    <li class="services-list__item">
+                        <div class="services-list__item-header">
+                            <h5>FastAPI (Backend Framework)</h5>
+                        </div>
+                        <div class="services-list__item-body">
+                            <p>
+                                FastAPI is my go-to backend framework for creating high-performance APIs. I use it to build scalable backend services that interact with network devices, process configuration tasks, and serve data to front-end dashboards.
+                            </p>
+                        </div>
+                    </li> <!-- services-list__item -->
+                    <li class="services-list__item">
+                        <div class="services-list__item-header">
+                            <h5>Quality Assurance & Software Testing</h5>
+                        </div>
+                        <div class="services-list__item-body">
+                            <p>
+                                During my internship at Huawei, I’ve been actively involved in software testing and QA processes. This includes functional testing, bug tracking, and working closely with developers to ensure that applications are reliable and user-ready.
+
+
+                            </p>
+                        </div>
+                    </li> <!-- services-list__item -->
+                </ul> <!-- end services-list -->
+            </div>
+
+        </div> <!-- s-services__content -->
+
+    </section> <!-- end s-services -->
+
+
+    <!-- portfolio
+    ================================================== -->
+    <section id="portfolio" class="s-portfolio target-section">
+
+        <div class="row s-portfolio__header">
+            <div class="column large-6 medium-8 tab-full">
+                <div class="section-intro" data-num="03" data-aos="fade-up">
+                    <h3 class="subhead">Portfolio</h3>
+                    <h1 class="display-1">
+                        A selection of recent projects I have worked on.
+                    </h1>
+                </div>
+            </div>
+        </div> <!-- s-porfolio__header -->
+
+        <div class="row s-porfolio__list block-large-1-2 block-tab-full collapse">
+
+            <div class="column" data-aos="fade-up">
+                <div class="folio-item">
+                    <div class="folio-item__thumb">
+                        <a class="folio-item__thumb-link" href="images/kanban.png" title="Windows in The City" data-size="1050x700">
+                            <img src="images/kanban.png" 
+                                 srcset="images/kanban.png 1x, images/kanban.png 2x" alt="">
+                        </a>
+                    </div>
+                    <div class="folio-item__info">
+                        <div class="folio-item__cat">Task Management</div>
+                        <h4 class="folio-item__title">Web App</h4>
+                    </div>
+                    <a href="https://github.com/Grace-Folarin/Kanban-Task-Management-Web-APP" title="Project Link" class="folio-item__project-link">Project Link</a>
+                    <div class="folio-item__caption">
+                        <!-- <p>Vero molestiae sed aut natus excepturi. Et tempora numquam. Temporibus iusto quo.Unde dolorem corrupti neque nisi.</p> -->
+                    </div>
+                </div>
+            </div> <!-- end column -->
+            <div class="column" data-aos="fade-up">
+                <div class="folio-item">
+                    <div class="folio-item__thumb">
+                        <a class="folio-item__thumb-link" href="images/Fylo.png" title="Building Blocks" data-size="1050x700">
+                            <img src="images/Fylo.png" 
+                                 srcset="images/Fylo.png 1x, images/Fylo.png 2x" alt="">
+                        </a>
+                    </div>
+                    <div class="folio-item__info">
+                        <div class="folio-item__cat">Frontend Design</div>
+                        <h4 class="folio-item__title">Fylo Dark Theme</h4>
+                    </div>
+                    <a href="https://github.com/Grace-Folarin/Fylo-Dark-Theme" title="Project Link" class="folio-item__project-link">Project Link</a>
+                    <div class="folio-item__caption">
+                        <!-- <p>Vero molestiae sed aut natus excepturi. Et tempora numquam. Temporibus iusto quo.Unde dolorem corrupti neque nisi.</p> -->
+                    </div>
+                </div>
+            </div> <!-- end column -->
+            <div class="column" data-aos="fade-up">
+                <div class="folio-item">
+                    <div class="folio-item__thumb">
+                        <a class="folio-item__thumb-link" href="images/Visionlink.png" Title="Shout and Jump" data-size="1050x700">
+                            <img src="images/Visionlink.png" 
+                                 srcset="images/VisionLink.png 1x, images/VisionLin.png 2x" alt="">
+                        </a>
+                    </div>
+                    <div class="folio-item__info">
+                        <div class="folio-item__cat">Frontend</div>
+                        <h4 class="folio-item__title">VisionLink</h4>
+                    </div>
+                    <a href="" title="Project Link" class="folio-item__project-link">Project Link</a>
+                    <div class="folio-item__caption">
+        
+                    </div>
+                </div>
+            </div> <!-- end column -->
+            <div class="column" data-aos="fade-up">
+                <div class="folio-item">
+                    <div class="folio-item__thumb">
+                        <a class="folio-item__thumb-link" href="images/Video-audio.png" title="Sand Dunes" data-size="1050x700">
+                            <img src="images/Video-audio.png" 
+                                 srcset="images/Video-audio.png 1x, images/Video-audio.png 2x" alt="">
+                        </a>
+                    </div>
+                    <div class="folio-item__info">
+                        <div class="folio-item__cat">Python Script</div>
+                        <h4 class="folio-item__title">Video To Audio</h4>
+                    </div>
+                    <a href="https://github.com/Grace-Folarin/Video-to-audio" title="Project Link" class="folio-item__project-link">Project Link</a>
+                    <div class="folio-item__caption">
+                        <!-- <p>Vero molestiae sed aut natus excepturi. Et tempora numquam. Temporibus iusto quo.Unde dolorem corrupti neque nisi.</p> -->
+                    </div>
+                </div>
+            </div> <!-- end column -->
+            
+           
+
+        </div> <!-- folio-list -->
+
+    </section> <!-- end portfolio -->
+
+
+    
+
+        <!-- CTA
+        ================================================== -->
+       
+    </section> <!-- end s-testimonials -->
+
+
+    <!-- footer
+    ================================================== -->
+    <footer class="s-footer h-dark-bg">
+        
+        <div class="right-vert-line"></div>
+
+        <div class="row s-footer__main">
+            <div class="column large-6">
+                <div class="section-intro" data-aos="fade-up">
+                    <h3 class="subhead">Get In Touch</h3>
+
+                    <h1 class="display-1">
+                    Have an idea or a concept that really excite you?
+                    Let's turn that idea into reality. Shoot me a message.
+                    </h1>
+                </div>
+
+                <div class="footer-email-us">
+                    <a href="mailto:folarinanuoluwapograce@gmail.com" class="btn btn--primary h-full-width">Let's Talk</a>
+                </div>
+            </div>
+
+            <div class="column large-5">
+                <div class="footer-contacts">
+                    <div class="footer-contact-block" data-aos="fade-up">
+                        <h5 class="footer-contact-block__header">
+                            Email
+                        </h5>
+                        <p class="footer-contact-block__content">
+                            <a href="mailto:folarinanuoluwapograce@gmail.com">folarinanuoluwapograce@gmail.com</a>
+                        </p>
+                    </div> <!-- end footer-contact-block -->
+                    <div class="footer-contact-block" data-aos="fade-up">
+                        <h5 class="footer-contact-block__header">
+                            Phone
+                        </h5>
+                        <p class="footer-contact-block__content">
+                            <a href="tel:+1975432345">+234 8164 77 1008</a>
+                        </p>
+                    </div> <!-- end footer-contact-block -->
+                    <br>
+                    <div class="footer-contact-block" data-aos="fade-up">
+                        <h5 class="footer-contact-block__header">
+                            Social
+                        </h5>
+                        <ul class="footer-contact-block__list">
+                            <li><a href="https://www.linkedin.com/in/folarinanuoluwapograce/">LinkedIn</a></li>
+                            <li><a href="https://github.com/Grace-Folarin?tab=repositories">GitHub</a></li>
+                            <!-- <li><a href="#0">Behance</a></li>
+                            <li><a href="#0">Dribbble</a></li> -->
+                        </ul>
+                    </div> <!-- end footer-contact-block -->
+                </div>
+            </div>
+        </div> <!-- end s-footer__main -->
+
+        <div class="row s-footer__bottom">
+            <div class="column large-full ss-copyright">
+                <span></span> 
+            </div> <!-- end ss-copyright -->
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0l8 9h-6v15h-4v-15h-6z"/></svg>
+                </a>
+            </div> <!-- end ss-go-top -->
+        </div> <!-- end s-footer__bottom -->
+
+    </footer> <!-- end s-footer -->
+
+
+    <!-- photoswipe background
+    ================================================== -->
+    <div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title=
+                    "Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title=
+                    "Zoom in/out"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
+                "Next (arrow right)"></button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+
         </div>
-    </section>
 
-    <script>
-        // Smooth scrolling for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+    </div> <!-- end photoSwipe background -->
 
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('h1, h2, p, .hero-img, .feature-card, .product-card').forEach(el => {
-                        el.classList.add('visible');
-                    });
-                }
-            });
-        }, { threshold: 0.2 });
 
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
+    <!-- Java Script
+    ================================================== -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
 
-        // Form submission (mock)
-        document.querySelector('.contact-form button').addEventListener('click', () => {
-            const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
-            let filled = true;
-            inputs.forEach(input => {
-                if (!input.value) filled = false;
-            });
-            if (filled) {
-                alert('Message sent successfully!');
-                inputs.forEach(input => input.value = '');
-            } else {
-                alert('Please fill out all fields.');
-            }
-        });
-    </script>
 </body>
-</html>
